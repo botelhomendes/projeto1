@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body class="is-preload">
+            
             <h1> pagina do adm </h1>
 		<!-- Header -->
 			<section id="header">
