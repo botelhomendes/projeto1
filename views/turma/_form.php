@@ -25,10 +25,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'dt_inicio')->textInput() ?>
 
     <?= $form->field($model, 'dt_fim')->textInput() ?>
- <?php $items = $model->getDataListProfissional();?>
-    <?= $form->field($model, 'id_profissional')->dropDownList($items) ?>
-<?php $especialidades = $model->getDataListEspecialidade(); ?>
-    <?= $form->field($model, 'id_especialidade')->dropDownList($especialidades) ?>
+
+    <?= $form->field($model, 'id_profissional')->textInput() ?>
+
+    <?= $form->field($model, 'id_especialidade')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

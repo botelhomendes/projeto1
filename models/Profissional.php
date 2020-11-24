@@ -81,7 +81,7 @@ class Profissional extends \yii\db\ActiveRecord
         'items' => [
             ['label' => 'Cadastros', 'url' => ['/site/index'],
                 'items' => [
-                    ['label' => 'Aluno', 'url' => ['/aluno/create']],
+                    ['label' => 'Aluno', 'url' => ['/aluno/index']],
                     ['label' => 'Profissional', 'url' => ['/profissional/create']],
                     ['label' => 'Turma', 'url' => ['/aluno/create']],
                     ['label' => 'Avaliação', 'url' => ['/avaliacao/create']]

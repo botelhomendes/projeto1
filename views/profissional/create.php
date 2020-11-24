@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="profissional-create">
 <?php
-    echo $model->getNavBar();
+    echo $searchModel->getNavBar();
     ?>
     <h1><?= Html::encode($this->title) ?></h1>
 

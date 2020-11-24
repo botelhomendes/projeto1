@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Turma */
 
-$this->title = 'Create Turma';
+$this->title = 'Cadastro Turma 222222222222';
 $this->params['breadcrumbs'][] = ['label' => 'Turmas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

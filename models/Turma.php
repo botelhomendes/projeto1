@@ -1,7 +1,6 @@
 <?php
 
 namespace app\models;
-use yii\helpers\ArrayHelper;
 
 use Yii;
 
@@ -40,9 +39,7 @@ class Turma extends \yii\db\ActiveRecord
         return [
             [['nm_turma', 'ds_turno', 'nr_vagas', 'hr_inicio', 'hr_fim', 'dt_inicio', 'dt_fim', 'id_profissional', 'id_especialidade'], 'required'],
             [['nr_vagas', 'id_profissional', 'id_especialidade'], 'integer'],
-            [['hr_inicio', 'hr_fim'], 'safe'],
-            [['dt_inicio', 'dt_fim'], 'date', 'format' => 'yyyy-MM-dd' ],
-             
+            [['hr_inicio', 'hr_fim', 'dt_inicio', 'dt_fim'], 'safe'],
             [['nm_turma'], 'string', 'max' => 200],
             [['ds_turno'], 'string', 'max' => 100],
             [['id_especialidade'], 'exist', 'skipOnError' => true, 'targetClass' => Especialidade::className(), 'targetAttribute' => ['id_especialidade' => 'id_especialidade']],
@@ -56,14 +53,14 @@ class Turma extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_turma' => 'Id Turma',
-            'nm_turma' => 'Nm Turma',
-            'ds_turno' => 'Ds Turno',
-            'nr_vagas' => 'Nr Vagas',
-            'hr_inicio' => 'Hr Inicio',
-            'hr_fim' => 'Hr Fim',
-            'dt_inicio' => 'Dt Inicio',
-            'dt_fim' => 'Dt Fim',
+            'id_turma' => 'Código da Turma',
+            'nm_turma' => 'Nome da Turma',
+            'ds_turno' => 'Turno',
+            'nr_vagas' => 'Número de Vagas',
+            'hr_inicio' => 'Horário Inicio',
+            'hr_fim' => 'Horário Inicio',
+            'dt_inicio' => 'Data Inicio',
+            'dt_fim' => 'Data Fim',
             'id_profissional' => 'Id Profissional',
             'id_especialidade' => 'Id Especialidade',
         ];
@@ -97,23 +94,4 @@ class Turma extends \yii\db\ActiveRecord
     {
         return new TurmaQuery(get_called_class());
     }
-  
-    
-    public function getDataListEspecialidade() { // could be a static func as well
-
-        $models = Especialidade::find()->asArray()->all();
-
-        return ArrayHelper::map($models, 'id_especialidade', 'nm_especialidade');
-
-    }
-
-    public function getDataListProfissional() { // could be a static func as well
-
-        $models = Profissional::find()->asArray()->all();
-
-        return ArrayHelper::map($models, 'id_profissional', 'nm_profissional');
-
-    }
 }
-    
-

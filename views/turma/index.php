@@ -7,16 +7,11 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\TurmaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Turmas';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Turma';
 ?>
 <div class="turma-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Turma', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -31,15 +26,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'ds_turno',
             'nr_vagas',
             'hr_inicio',
-            'hr_fim',
-            'dt_inicio',
-            'dt_fim',
-            'id_profissional',
-            'id_especialidade',
+            //'hr_fim',
+            //'dt_inicio',
+            //'dt_fim',
+            //'id_profissional',
+            //'id_especialidade',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    <div class="form-group">
+         <?= Html::a('Cadastrar', ['/turma/create'], ['class'=>'btn btn-primary']) ?>
+        
+        
+    </div>
 
 
 </div>

@@ -32,8 +32,7 @@ class Especialidade extends \yii\db\ActiveRecord
     {
         return [
             [['nm_especialidade', 'nr_tempo_duracao', 'id_especialidade_profissional'], 'required'],
-             [['nm_especialidade'], 'string', 'max' => 100],
-            [['nr_tempo_duracao', 'id_especialidade_profissional'], 'integer'],
+            [['nm_especialidade', 'nr_tempo_duracao', 'id_especialidade_profissional'], 'integer'],
         ];
     }
 
