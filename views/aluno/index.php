@@ -7,12 +7,14 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\grid\GridView;
+use yii\helpers\Url;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Aluno */
 /* @var $form ActiveForm */
 ?>
 <div class="aluno-index">
-<?php
+    <?php
     NavBar::begin([
         'brandLabel' => 'Academia Harmonia Faz Bem',
         'brandUrl' => Yii::$app->homeUrl,
@@ -52,57 +54,36 @@ use yii\grid\GridView;
 
     NavBar::end();
     ?>
-    
-      <?= GridView::widget([
+
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id_aluno',
+            //  ['class' => 'yii\grid\SerialColumn'],            
             'nm_aluno',
-            'dt_nascimento',
-            //'ds_medicamento',
-            //'ds_patologia',
-            //'ds_cirurgia',
-            //'fl_tabagista',
-            //'nr_cigarro',
-            //'nr_tempo_tabagismo',
-            //'nr_tempo_ex_tabagismo',
-            //'ds_comentario_tabagismo',
-            //'ds_doenca_respiratoria',
-            //'ds_comentario_doenca_respiratoria',
-            //'nr_filhos',
-            //'ds_ciclo_cesaria',
-            //'nr_nocturia',
-            //'ds_avaliacao_postural',
-            //'vr_p_a',
-            //'fl_relacao_dor',
-            //'fl_relacao_prazer',
-            //'fl_incontinencia',
-            //'ds_valor_braco_dir_esq',
-            //'ds_torax_abdomem',
-            //'ds_quadril_culote',
-            //'ds_coxa_dir_esq',
-            //'fl_endema',
-            //'fl_dor_circulatorio',
-            //'fl_peso',
-            //'ds_comentario_circulatorio',
-            //'fl_restricao',
-            //'ds_comentario_disgestivo',
-            //'nr_refeicoes_dia',
-            //'nr_litros_agua_dia',
-            //'ds_flexibilidade',
-            //'ds_imc',
-            //'ds_orientacoes',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            'ds_cpf',
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{view}{create}',
+                'visible' => Yii::$app->user->isGuest ? false : true,
+                'buttons' => [
+                    'view' => function ($url) {
+                        return Html::a('<span class="glyphicon glyphicon-book"></span>', Url::to($url), [
+                                    'title' => Yii::t('app', 'Relatório'),
+                        ]);
+//return Html::a('<span class="glyphicon glyphicon-plus"></span>', $url, [
+                        //	'title' => Yii::t('yii', 'Create'),
+//				]);                                         
+                    }
+                ]
+            ],
         ],
-    ]); ?>
-     <div class="form-group">
-         <?= Html::a('Cadastrar', ['/aluno/create'], ['class'=>'btn btn-primary']) ?>
-        
-        
+    ]);
+    ?>
+    <div class="form-group">
+<?= Html::a('Cadastrar', ['/aluno/create'], ['class' => 'btn btn-primary']) ?>
+
+
     </div>
 
 </div><!-- aluno-index -->
