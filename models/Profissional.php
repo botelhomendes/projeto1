@@ -89,7 +89,7 @@ class Profissional extends \yii\db\ActiveRecord
             ],
             ['label' => 'Relatórios', 'url' => ['/site/about'],
                 'items' => [
-                    ['label' => 'Aluno', 'url' => ['/aluno/create']],
+                    ['label' => 'Aluno', 'url' => ['/aluno/_search']],
                     ['label' => 'Profissional', 'url' => ['/aluno/create']],
                     ['label' => 'Turma', 'url' => ['/aluno/create']]
                 ]

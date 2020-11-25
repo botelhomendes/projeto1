@@ -76,6 +76,24 @@ class AlunoController extends Controller
             'model' => $model,
         ]);
     }
+    
+       public function actionRelatorio()
+    {
+        $model = new Aluno();
+        $searchModel = new AlunoSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id_aluno]);
+        }
+
+        return $this->render('relatorio', [
+            'model' => $model,
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+        ]);
+    }
+    
 
         public function actionTeste()
     {
