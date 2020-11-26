@@ -15,44 +15,7 @@ use yii\helpers\Url;
 ?>
 <div class="aluno-index">
     <?php
-    NavBar::begin([
-        'brandLabel' => 'Academia Harmonia Faz Bem',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems[] = ['label' => '<i class="glyphicon glyphicon-user"></i> Search', 'url' => ['/site/search']];
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Cadastros', 'url' => ['/site/index'],
-                'items' => [
-                    ['label' => 'Aluno', 'url' => ['/aluno/index']],
-                    ['label' => 'Professor', 'url' => ['/aluno/create']],
-                    ['label' => 'Turma', 'url' => ['/aluno/create']],
-                    ['label' => 'Avaliação', 'url' => ['/avaliacao/create']]
-                ]
-            ],
-            ['label' => 'Relatórios', 'url' => ['/site/about'],
-                'items' => [
-                    ['label' => 'Aluno', 'url' => ['/aluno/create']],
-                    ['label' => 'Professor', 'url' => ['/aluno/create']],
-                    ['label' => 'Turma', 'url' => ['/aluno/create']]
-                ]
-            ],
-            Yii::$app->user->isGuest ?
-                    ['label' => 'Login', 'url' => ['/site/login']] :
-                    [
-                'label' => '<i class="glyphicon glyphicon-user"></i> Sair (' . Yii::$app->user->identity->username . ')',
-                'url' => ['/site/logout'],
-                'linkOptions' => ['data-method' => 'post']
-                    ],
-        ],
-        'encodeLabels' => false,
-    ]);
-
-    NavBar::end();
+    echo $model->getNavBar();
     ?>
 
     <?=
@@ -68,6 +31,7 @@ use yii\helpers\Url;
                 'visible' => Yii::$app->user->isGuest ? false : true,
                 'buttons' => [
                     'view' => function ($url) {
+                        $url = '/index.php?r=aluno/relatorio';
                         return Html::a('<span class="glyphicon glyphicon-book"></span>', Url::to($url), [
                                     'title' => Yii::t('app', 'Relatório'),
                         ]);

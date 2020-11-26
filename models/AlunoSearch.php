@@ -17,7 +17,7 @@ class AlunoSearch extends Aluno
     public function rules()
     {
         return [
-            [['id_aluno', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp', 'id_convenio'], 'integer'],
+            [['id', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp', 'id_convenio'], 'integer'],
             [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_identidade', 'ds_responsaveis', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_email', 'ds_profissao'], 'safe'],
         ];
     }
@@ -58,7 +58,7 @@ class AlunoSearch extends Aluno
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id_aluno' => $this->id_aluno,
+            'id' => $this->id,
             'dt_nascimento' => $this->dt_nascimento,
             'ds_telefone1' => $this->ds_telefone1,
             'ds_telefone2' => $this->ds_telefone2,

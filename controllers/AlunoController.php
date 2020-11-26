@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use Mpdf;
 use app\models\Aluno;
 use app\models\AlunoSearch;
 use yii\web\Controller;
@@ -67,13 +68,17 @@ class AlunoController extends Controller
     public function actionCreate()
     {
         $model = new Aluno();
+        $searchModel = new AlunoSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_aluno]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
     
@@ -84,7 +89,7 @@ class AlunoController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_aluno]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('relatorio', [
@@ -100,7 +105,7 @@ class AlunoController extends Controller
         $model = new Aluno();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_aluno]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('teste', [
@@ -119,7 +124,7 @@ class AlunoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_aluno]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -156,4 +161,5 @@ class AlunoController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+ 
 }
