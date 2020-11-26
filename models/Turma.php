@@ -58,11 +58,11 @@ class Turma extends \yii\db\ActiveRecord
             'ds_turno' => 'Turno',
             'nr_vagas' => 'Número de Vagas',
             'hr_inicio' => 'Horário Inicio',
-            'hr_fim' => 'Horário Inicio',
+            'hr_fim' => 'Horário Fim',
             'dt_inicio' => 'Data Inicio',
             'dt_fim' => 'Data Fim',
-            'id_profissional' => 'Id Profissional',
-            'id_especialidade' => 'Id Especialidade',
+            'id_profissional' => 'Profissional',
+            'id_especialidade' => 'Especialidade',
         ];
     }
 

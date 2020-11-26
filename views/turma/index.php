@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\TurmaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Turma';
+$this->title = 'Pesquisar Turma';
 ?>
 <div class="turma-index">
 
@@ -24,8 +24,8 @@ $this->title = 'Turma';
             'id_turma',
             'nm_turma',
             'ds_turno',
-            'nr_vagas',
-            'hr_inicio',
+           // 'nr_vagas',
+           // 'hr_inicio',
             //'hr_fim',
             //'dt_inicio',
             //'dt_fim',
