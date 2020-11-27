@@ -32,9 +32,11 @@ use yii\helpers\Url;
                 'buttons' => [
                     'view' => function ($url, $model) {
                         $url = '/index.php?r=relatorio/relatorioalunoindividual&id='.$model->id;
-                        return Html::a('<span class="glyphicon glyphicon-book"></span>', Url::to($url), [
-                                    'title' => Yii::t('app', 'Relatório'),
-                        ]);
+                        return Html::a('<span class="glyphicon glyphicon-book"></span>',  Url::to($url), 
+                                
+                                ['title' => Yii::t('app', 'Relatório'),
+                                 'target' =>'_blank',                                    
+                                ]);
 //return Html::a('<span class="glyphicon glyphicon-plus"></span>', $url, [
                         //	'title' => Yii::t('yii', 'Create'),
 //				]);                                         
