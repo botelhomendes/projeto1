@@ -37,7 +37,9 @@ class AlunoController extends Controller
      */
     public function actionIndex()
     {
-      
+      //nao existe o model aqui. Mas nao precisa, é so usar o searchModel, porque ele extende de ALUNO (que é o $model).
+        
+         //blz? ok
         $searchModel = new AlunoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

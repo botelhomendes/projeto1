@@ -11,15 +11,28 @@ use yii\widgets\ActiveForm;
 <div class="profissional-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+        <div class="col-md-6">
+             <?= $form->field($model, 'nm_profissional')->textInput(['maxlength' => true, 'style' => 'width:550px']) ?>
+        </div>
+        <div class="col-md-6">           
+            <?php $accountStatus1 = array() ?>
+            <?= $form->field($model, 'tp_registro')->dropDownList($accountStatus1,[ 'style' => 'width:400px']) ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+             <?= $form->field($model, 'nr_registro')->textInput(['maxlength' => true, 'style' => 'width:300px']) ?>
+        </div>
+    </div>
+   
 
-    <?= $form->field($model, 'nm_profissional')->textInput(['maxlength' => true]) ?>
+    
 
-    <?= $form->field($model, 'tp_registro')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'nr_registro')->textInput() ?>
+   
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

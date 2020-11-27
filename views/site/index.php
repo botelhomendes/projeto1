@@ -29,7 +29,8 @@ $this->title = 'Harmonia Faz Bem';
                     ['label' => 'Aluno', 'url' => ['/aluno/index']],
                     ['label' => 'Profissional', 'url' => ['/profissional/create']],
                     ['label' => 'Turma', 'url' => ['/aluno/create']],
-                    ['label' => 'Avaliação', 'url' => ['/avaliacao/create']]
+                    ['label' => 'Avaliação', 'url' => ['/avaliacao/create']],
+                    ['label' => 'Convênio', 'url' => ['/convenio/create']]
                 ]
             ],
             ['label' => 'Relatórios', 'url' => ['/site/about'],
