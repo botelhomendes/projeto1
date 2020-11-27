@@ -8,6 +8,57 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 
 ?>
+<script>
+function showInternDetails(){ 
+$('#fl_paciente').on('change',function(){        
+    showOrHideActivateReminder();});
+}
+
+function showOrHideActivateReminder() {
+    if($('#fl_paciente').is(':checked'))
+    {
+        $('#im_foto').show()
+    }
+    else{
+        $('#im_foto').hide();
+    }    
+} 
+
+$(document).ready(function() {
+    <?php 
+            if($model->fl_paciente)
+            {
+                echo "
+                showOrHideActivateReminder();
+                ";
+            }
+            ?>
+});
+</script>
+
+<script>
+    $('._addNew').on('click', function(event){
+    event.preventDefault();
+    var data = {};
+    data.pruebaId = $('#nm_aluno').val();
+
+    var success = function(data){
+       //console.log("Success!", data);
+       
+       console.window.alert(data);
+    }
+    var error = function(data){
+         console.window.alert(data);
+       //console.log("Error!", data);
+    }
+    $.ajax({
+      url:'partidaasociada/get-linea',
+      type:'POST',
+      dataType:'json',
+      data:data
+   }, success, error);
+});
+    </script>
 
 <div class="aluno-form">
 
@@ -106,8 +157,17 @@ use yii\widgets\ActiveForm;
     
     <div class="row">
         <div class="col-md-2">           
-            <?= $form->field($model, 'fl_paciente')->checkbox(['S' => '']) ?>
+            <?= $form->field($model, 'fl_paciente')->checkbox(['S' => '', 
+                'onclick' => 'showInternDetails()']) ?>
         </div>
+       
+        <div class="col-md-2">           
+           <button class="btn btn-primary _addNew">Add New</button>
+        </div>
+       
+        
+        
+        
         <div class="col-md-3">
             <div class="form-group">
                 <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
