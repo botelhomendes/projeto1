@@ -15,7 +15,7 @@ use yii\helpers\Url;
 ?>
 <div class="aluno-index">
     <?php
-    echo $model->getNavBar();
+    echo $searchModel->getNavBar();
     ?>
 
     <?=
@@ -30,8 +30,8 @@ use yii\helpers\Url;
                 'template' => '{view}{create}',
                 'visible' => Yii::$app->user->isGuest ? false : true,
                 'buttons' => [
-                    'view' => function ($url) {
-                        $url = '/index.php?r=aluno/relatorio';
+                    'view' => function ($url, $model) {
+                        $url = '/index.php?r=relatorio/relatorioalunoindividual&id='.$model->id;
                         return Html::a('<span class="glyphicon glyphicon-book"></span>', Url::to($url), [
                                     'title' => Yii::t('app', 'Relatório'),
                         ]);
