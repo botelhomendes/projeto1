@@ -59,6 +59,11 @@ class Aluno extends \yii\db\ActiveRecord
             [['ds_cep'], 'string', 'max' => 10],
             [['ds_profissao'], 'string', 'max' => 100],
             [['id_convenio'], 'unique'],
+            [['fl_paciente'], 'string', 'max' => 1],
+            [['nr_matricula_conv'], 'integer'],
+            [['dt_validade'], 'date', 'format' => 'yyyy-MM-dd'],
+            [['ds_observacao'], 'string', 'max' => 200],
+            [['im_foto'], 'string']
         ];
     }
 
@@ -84,8 +89,12 @@ class Aluno extends \yii\db\ActiveRecord
             'ds_telefone1' => 'Telefone 1',
             'ds_telefone2' => 'Telefone 2',
             'ds_whatsapp' => 'Whatsapp',
-            'id_convenio' => 'Código do Convenio',
-            'fl_paciente' => 'Paciente'
+            'id_convenio' => 'Convênio',
+            'fl_paciente' => 'Paciente',
+            'nr_matricula_conv' => 'Matrícula',
+            'dt_validade' => 'Validade',
+            'ds_observacao' => 'Observação',
+            'im_foto' => 'Foto'
         ];
     }
     
@@ -129,4 +138,35 @@ class Aluno extends \yii\db\ActiveRecord
 
     NavBar::end();
     }
+    
+    public function getEstados(){
+        return $estados =  ['MG' => 'MG', 
+                            'AC' => 'AC', 
+                            'AL' => 'AC', 
+                            'AM' => 'AM',
+                            'AP' => 'AP',
+                            'BA' => 'BA', 
+                            'CE' => 'CE', 
+                            'DF' => 'DF', 
+                            'ES' => 'ES', 
+                            'GO' => 'GO', 
+                            'MA' => 'MA',  
+                            'MT' => 'MT', 
+                            'MS' => 'MS',                             
+                            'PA' => 'PA', 
+                            'PB' => 'PB', 
+                            'PR' => 'PR',   
+                            'PE' => 'PE', 
+                            'PI' => 'PI', 
+                            'RJ' => 'RJ', 
+                            'RN' => 'RN', 
+                            'RO' => 'RO', 
+                            'RS' => 'RS', 
+                            'RR' => 'RR', 
+                            'SC' => 'SC', 
+                            'SE' => 'SE', 
+                            'SP' => 'SP', 
+                            'TO' => 'TO'];
+    }
+    
 }
