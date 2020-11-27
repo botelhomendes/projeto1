@@ -48,7 +48,7 @@ class Aluno extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_identidade', 'ds_responsaveis', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_email', 'ds_profissao', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp', 'id_convenio'], 'required'],
+            [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_identidade', 'ds_responsaveis', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_email', 'ds_profissao', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp', 'id_convenio', 'fl_paciente'], 'required'],
             [['dt_nascimento'], 'date', 'format' => 'yyyy-MM-dd'],
             [['ds_telefone1', 'ds_telefone2', 'ds_whatsapp', 'id_convenio'], 'integer'],
             [['nm_aluno', 'ds_responsaveis', 'ds_cidade', 'ds_endereco', 'ds_email'], 'string', 'max' => 200],
@@ -85,6 +85,7 @@ class Aluno extends \yii\db\ActiveRecord
             'ds_telefone2' => 'Telefone 2',
             'ds_whatsapp' => 'Whatsapp',
             'id_convenio' => 'Código do Convenio',
+            'fl_paciente' => 'Paciente'
         ];
     }
     
