@@ -1,13 +1,13 @@
 <?php
 
 namespace app\models;
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
-use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
+use DateTime;
 
 use Yii;
 
@@ -47,15 +47,11 @@ class Aluno extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+      
         return [
-            [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_identidade', 'ds_responsaveis', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_email', 'ds_profissao', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp', 'id_convenio'], 'required'],
-           ['fl_paciente', 'required', 'when' => function($model) {
-        return $model->fl_paciente == 'S'; }, 'whenClient' => "isPacienteChecked"],
+         //   [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_identidade', 'ds_responsaveis', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_email', 'ds_profissao', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp'], 'required'],  
             
-           
-   
-            
-            [['dt_nascimento'], 'date', 'format' => 'yyyy-MM-dd'],
+            [['dt_nascimento'], 'date', 'format' => 'dd/MM/yyyy'],
             [['ds_telefone1', 'ds_telefone2', 'ds_whatsapp', 'id_convenio'], 'integer'],
             [['nm_aluno', 'ds_responsaveis', 'ds_cidade', 'ds_endereco', 'ds_email'], 'string', 'max' => 200],
             [['ds_cpf'], 'string', 'max' => 11],
@@ -64,13 +60,14 @@ class Aluno extends \yii\db\ActiveRecord
             [['ds_estado'], 'string', 'max' => 2],
             [['ds_cep'], 'string', 'max' => 10],
             [['ds_profissao'], 'string', 'max' => 100],
-            [['id_convenio'], 'unique'],
+            [['id_convenio'], 'integer'],
             [['fl_paciente'], 'string', 'max' => 1],
             [['nr_matricula_conv'], 'integer'],
             [['dt_validade'], 'date', 'format' => 'yyyy-MM-dd'],
             [['ds_observacao'], 'string', 'max' => 200],
             [['im_foto'], 'string'],
-            [['id_profissional'], 'string']
+            [['id_convenio'], 'string'],
+            [['id_profissional'], 'integer']
         ];
     }
 
@@ -101,7 +98,7 @@ class Aluno extends \yii\db\ActiveRecord
             'nr_matricula_conv' => 'Matrícula',
             'dt_validade' => 'Validade',
             'ds_observacao' => 'Observação',
-            'im_foto' => 'Foto',
+            'im_foto' => 'Foto',            
             'id_profissional' => 'Profissional'
         ];
     }
@@ -176,5 +173,40 @@ class Aluno extends \yii\db\ActiveRecord
                             'SP' => 'SP', 
                             'TO' => 'TO'];
     }
+    
+      public function getDataListConvenio() { // could be a static func as well
+       
+        $models = Convenio::find()->asArray()->all();
+        array_unshift ($models, new Convenio);
+        return ArrayHelper::map($models, 'id', 'ds_nome');
+
+    }
+
+    public function getDataListProfissional() { // could be a static func as well
+        
+                      
+        $models = Profissional::find()->asArray()->all();
+        array_unshift ($models, new Profissional);
+        return ArrayHelper::map($models, 'id_profissional', 'nm_profissional');
+
+    }
+    
+    
+    
+   public function behaviors()
+   {
+       return [
+           [
+               'class' =>TimestampBehavior::className(),
+               'attributes' => [
+                   ActiveRecord::EVENT_BEFORE_INSERT => ['dt_nascimento'],
+                   ActiveRecord::EVENT_BEFORE_UPDATE => ['dt_nascimento'],
+               ],
+               'value' => function() { 
+           $date = DateTime::createFromFormat('d/m/Y', $this->dt_nascimento);
+           return Yii::$app->formatter->asDate($date, 'php:Y-m-d'); }
+           ],
+       ];
+   }
     
 }
