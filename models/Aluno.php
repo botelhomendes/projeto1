@@ -48,7 +48,13 @@ class Aluno extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_identidade', 'ds_responsaveis', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_email', 'ds_profissao', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp', 'id_convenio', 'fl_paciente'], 'required'],
+            [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_identidade', 'ds_responsaveis', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_email', 'ds_profissao', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp', 'id_convenio'], 'required'],
+           ['fl_paciente', 'required', 'when' => function($model) {
+        return $model->fl_paciente == 'S'; }, 'whenClient' => "isPacienteChecked"],
+            
+           
+   
+            
             [['dt_nascimento'], 'date', 'format' => 'yyyy-MM-dd'],
             [['ds_telefone1', 'ds_telefone2', 'ds_whatsapp', 'id_convenio'], 'integer'],
             [['nm_aluno', 'ds_responsaveis', 'ds_cidade', 'ds_endereco', 'ds_email'], 'string', 'max' => 200],
@@ -63,7 +69,8 @@ class Aluno extends \yii\db\ActiveRecord
             [['nr_matricula_conv'], 'integer'],
             [['dt_validade'], 'date', 'format' => 'yyyy-MM-dd'],
             [['ds_observacao'], 'string', 'max' => 200],
-            [['im_foto'], 'string']
+            [['im_foto'], 'string'],
+            [['id_profissional'], 'string']
         ];
     }
 
@@ -94,7 +101,8 @@ class Aluno extends \yii\db\ActiveRecord
             'nr_matricula_conv' => 'Matrícula',
             'dt_validade' => 'Validade',
             'ds_observacao' => 'Observação',
-            'im_foto' => 'Foto'
+            'im_foto' => 'Foto',
+            'id_profissional' => 'Profissional'
         ];
     }
     

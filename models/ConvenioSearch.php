@@ -17,7 +17,7 @@ class ConvenioSearch extends Convenio
     public function rules()
     {
         return [
-            [['id_convenio', 'nr_registro_ans', 'cd_operadora'], 'integer'],
+            [['id', 'nr_registro_ans', 'cd_operadora'], 'integer'],
             [['vs_tiss', 'ds_nome'], 'safe'],
             [['tb_preco'], 'number'],
         ];
@@ -59,7 +59,7 @@ class ConvenioSearch extends Convenio
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id_convenio' => $this->id_convenio,
+            'id' => $this->id,
             'nr_registro_ans' => $this->nr_registro_ans,
             'cd_operadora' => $this->cd_operadora,
             'tb_preco' => $this->tb_preco,

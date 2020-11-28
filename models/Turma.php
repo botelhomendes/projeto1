@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use yii\helpers\ArrayHelper;
 
 use Yii;
 
@@ -94,4 +95,23 @@ class Turma extends \yii\db\ActiveRecord
     {
         return new TurmaQuery(get_called_class());
     }
+    
+     
+    public function getDataListEspecialidade() { // could be a static func as well
+
+        $models = Especialidade::find()->asArray()->all();
+
+        return ArrayHelper::map($models, 'id_especialidade', 'nm_especialidade');
+
+    }
+
+    public function getDataListProfissional() { // could be a static func as well
+
+        $models = Profissional::find()->asArray()->all();
+
+        return ArrayHelper::map($models, 'id_profissional', 'nm_profissional');
+
+    }
 }
+
+

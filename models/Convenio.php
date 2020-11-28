@@ -44,7 +44,7 @@ class Convenio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_convenio' => 'Código Convênio',
+            'id' => 'Código Convênio',
             'ds_nome' => 'Nome',
             'nr_registro_ans' => 'Nº Registro ANS',
             'cd_operadora' => 'Código na Operadora',
