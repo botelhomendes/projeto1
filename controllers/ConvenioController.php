@@ -67,7 +67,7 @@ class ConvenioController extends Controller
         $model = new Convenio();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_convenio]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -87,7 +87,7 @@ class ConvenioController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_convenio]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
