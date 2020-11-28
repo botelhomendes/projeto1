@@ -23,10 +23,12 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'id_profissional')->dropDownList([]) ?>  
+           <?php $items = $model->getDataListProfissional();?>
+    <?= $form->field($model, 'id_profissional')->dropDownList($items) ?>  
         </div>
         <div class="col-md-6">
-            <?= $form->field($model, 'id_especialidade')->dropDownList([]) ?>
+            <?php $especialidades = $model->getDataListEspecialidade(); ?>
+    <?= $form->field($model, 'id_especialidade')->dropDownList($especialidades) ?>
         </div>
     </div>
 

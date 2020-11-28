@@ -8,57 +8,28 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 
 ?>
-<script>
-function showInternDetails(){ 
-$('#fl_paciente').on('change',function(){        
-    showOrHideActivateReminder();});
-}
-
-function showOrHideActivateReminder() {
-    if($('#fl_paciente').is(':checked'))
-    {
-        $('#im_foto').show()
-    }
-    else{
-        $('#im_foto').hide();
-    }    
-} 
-
-$(document).ready(function() {
-    <?php 
-            if($model->fl_paciente)
-            {
-                echo "
-                showOrHideActivateReminder();
-                ";
-            }
-            ?>
-});
-</script>
-
-<script>
-    $('._addNew').on('click', function(event){
-    event.preventDefault();
-    var data = {};
-    data.pruebaId = $('#nm_aluno').val();
-
-    var success = function(data){
-       //console.log("Success!", data);
+<?php 
+$script = <<< JS
+$(function() {
+        $('#teste1').hide();
+        
+})
+        
+        
+$('#teste').change(function() {
+   
+    var ccexists = $("#paciente").prop("checked") ? true : false;
+    if (ccexists == true) {
+        $('#teste1').show();
+      
+    } else {
        
-       console.window.alert(data);
-    }
-    var error = function(data){
-         console.window.alert(data);
-       //console.log("Error!", data);
-    }
-    $.ajax({
-      url:'partidaasociada/get-linea',
-      type:'POST',
-      dataType:'json',
-      data:data
-   }, success, error);
+        $('#teste1').show();
+    };
 });
-    </script>
+JS;
+$this->registerJs($script);
+?>
 
 <div class="aluno-form">
 
@@ -154,18 +125,20 @@ $(document).ready(function() {
         </div>
               
    </div>
-    
-    <div class="row">
+  
+<div class="row">
         <div class="col-md-2">           
             <?= $form->field($model, 'fl_paciente')->checkbox(['S' => '', 
-                'onclick' => 'showInternDetails()']) ?>
+                'id' => 'teste'])                                                  
+                    ?>
         </div>
        
         <div class="col-md-2">           
-           <button class="btn btn-primary _addNew">Add New</button>
+            <?= $form->field($model, 'im_foto')->hiddenInput(['type' => 'textField', 'style' => 'width:400px', 'id' => 'teste1'])
+                    //['type' => 'textField', 'style' => 'width:400px']
+                    ?>
         </div>
        
-        
         
         
         <div class="col-md-3">
