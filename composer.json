@@ -22,7 +22,8 @@
         "mpdf/mpdf": "^8.0",
         "tecnickcom/tcpdf": "^6.3",
         "fpdf/fpdf": "^1.82",
-        "kartik-v/yii2-mpdf": "*"
+        "kartik-v/yii2-mpdf": "*",
+        "kartik-v/yii2-widget-datepicker": "^1.4"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
