@@ -11,9 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Profissionais', 'url' => ['index']
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="profissional-create">
-<?php
-    echo $searchModel->getNavBar();
-    ?>
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [

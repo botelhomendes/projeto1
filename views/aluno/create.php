@@ -15,9 +15,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Alunos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="aluno-create">
-   <?php
-    echo $searchModel->getNavBar();
-    ?>
+
 
     <h1><?= Html::encode($this->title) ?></h1>
 

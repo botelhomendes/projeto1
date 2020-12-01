@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Aluno */
 
-$this->title = $model->id;
+$this->title = $model->nm_aluno;
 $this->params['breadcrumbs'][] = ['label' => 'Alunos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -16,18 +16,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Alterar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
+        //verificar template valores para diminiur coluna
+        'template' => "<tr><th  style='width:250px'>{label}</th><td>{value}</td></tr>",
+         //'contentOptions' => ['style' => 'width:10px;'], 
+        
         'attributes' => [
             'id',
             'nm_aluno',
@@ -46,7 +44,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'ds_telefone2',
             'ds_whatsapp',
             'id_convenio',
+           
         ],
+            [
+                'attribute'=>'images',
+                'value'=> Yii::$app->homeUrl.'uploads/'.$model->images,
+                'format' => ['image',['width'=>'100','height'=>'100']],
+            ],
+         
     ]) ?>
 
 </div>

@@ -15,9 +15,7 @@ use yii\grid\GridView;;
 
 ?>
 <div class="aluno-index">
-<?php
-    echo $searchModel->getNavBar();
-    ?>
+
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 

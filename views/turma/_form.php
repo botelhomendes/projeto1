@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'nm_turma')->textInput(['maxlength' => true, 'style' => 'width:500px']) ?>  
         </div>  
         <div class="col-md-6">
-            <?php $accountStatus1 = array('S' => 'Selecione...', 'M' => 'MANHÃ', 'T' => 'TARDE', 'N' => 'NOITE') ?>
+            <?php $accountStatus1 = array('S' => 'Selecione...', 'MANHÃ' => 'MANHÃ', 'TARDE' => 'TARDE', 'NOITE' => 'NOITE') ?>
             <?= $form->field($model, 'ds_turno')->dropDownList($accountStatus1, ['style' => 'width:120px']) ?>
         </div>
     </div>

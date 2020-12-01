@@ -14,10 +14,7 @@ use yii\helpers\Url;
 /* @var $form ActiveForm */
 ?>
 <div class="aluno-index">
-    <?php
-    echo $searchModel->getNavBar();
-    ?>
-
+ 
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
@@ -29,21 +26,8 @@ use yii\helpers\Url;
             ['class' => 'yii\grid\ActionColumn',
                 'template' => '{view}{create}',
                 'visible' => Yii::$app->user->isGuest ? false : true,
-                'buttons' => [
-                    'view' => function ($url, $model) {
-                        $url = '/index.php?r=relatorio/relatorioalunoindividual&id='.$model->id;
-                        return Html::a('<span class="glyphicon glyphicon-book"></span>',  Url::to($url), 
-                                
-                                ['title' => Yii::t('app', 'Relatório'),
-                                 'target' =>'_blank',                                    
-                                ]);
-//return Html::a('<span class="glyphicon glyphicon-plus"></span>', $url, [
-                        //	'title' => Yii::t('yii', 'Create'),
-//				]);                                         
-                    }
-                ]
             ],
-        ],
+        ],        
     ]);
     ?>
     <div class="form-group">

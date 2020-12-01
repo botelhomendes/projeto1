@@ -28,33 +28,48 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
+
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'Academia Harmonia Faz Bem',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+    $menuItems[] = ['label' => '<i class="glyphicon glyphicon-user"></i> Search', 'url' => ['/site/search']];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Inicio', 'url' => ['/site/index']],
-            ['label' => 'Sobre', 'url' => ['/site/about']],
-            ['label' => 'Contato', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
+            ['label' => 'Cadastros', 'url' => ['/site/index'],
+                'items' => [
+                    ['label' => 'Aluno/Paciente', 'url' => ['/aluno/index']],
+                    ['label' => 'Profissional', 'url' => ['/profissional/create']],
+                    ['label' => 'Especialidade', 'url' => ['/especialidade/index']],
+                    ['label' => 'Turma', 'url' => ['/turma/index']],
+                    ['label' => 'TurmaXAluno', 'url' => ['/turmaaluno/index']],
+                    ['label' => 'Avaliação', 'url' => ['/avaliacao/index']]
+                ]
+            ],
+            ['label' => 'Relatórios', 'url' => ['/site/about'],
+                'items' => [
+                    ['label' => 'Aluno/Paciente', 'url' => ['/aluno/listaalunosrelatorio']],
+                    ['label' => 'Profissional', 'url' => ['/aluno/create']],
+                    ['label' => 'Turma', 'url' => ['/aluno/create']],
+                    ['label' => 'Avaliação', 'url' => ['/relatorio/relatorioalunoavaliacao']],
+                     ['label' => 'Graficos', 'url' => ['/grafico/grafico1']]
+                ]
+            ],
+            Yii::$app->user->isGuest ?
+                    ['label' => 'Login', 'url' => ['/site/login']] :
+                    [
+                'label' => '<i class="glyphicon glyphicon-user"></i> Sair (' . Yii::$app->user->identity->username . ')',
+                'url' => ['/site/logout'],
+                'linkOptions' => ['data-method' => 'post']
+                    ],
         ],
+        'encodeLabels' => false,
     ]);
+
     NavBar::end();
     ?>
 
@@ -69,7 +84,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Versão 1.0 <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Versão 0.01 <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

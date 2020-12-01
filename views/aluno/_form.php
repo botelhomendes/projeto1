@@ -63,7 +63,7 @@ $this->registerJs($script);
         </div>
         <div class="col-md-6">
 
-            <?php $accountStatus = array('M' => 'Masculino', 'F' => 'Feminino') ?>
+            <?php $accountStatus = array('Masculino' => 'Masculino', 'Feminino' => 'Feminino') ?>
             <?= $form->field($model, 'ds_sexo')->radioList($accountStatus) ?>	
         </div>
     </div>
