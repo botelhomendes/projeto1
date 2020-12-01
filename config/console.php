@@ -14,6 +14,9 @@ $config = [
         '@tests' => '@app/tests',
     ],
     'components' => [
+        'autocomplete' => [
+        'class' => 'iiifx\Yii2\Autocomplete\Component',
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
