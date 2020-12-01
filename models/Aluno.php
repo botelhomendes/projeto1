@@ -55,7 +55,7 @@ class Aluno extends \yii\db\ActiveRecord
             [['ds_telefone1', 'ds_telefone2', 'ds_whatsapp', 'id_convenio'], 'integer'],
             [['nm_aluno', 'ds_responsaveis', 'ds_cidade', 'ds_endereco', 'ds_email'], 'string', 'max' => 200],
             [['ds_cpf'], 'string', 'max' => 11],
-            [['ds_sexo'], 'string', 'max' => 1],
+            [['ds_sexo'], 'string', 'max' => 100],
             [['ds_identidade'], 'string', 'max' => 50],
             [['ds_estado'], 'string', 'max' => 2],
             [['ds_cep'], 'string', 'max' => 10],
@@ -67,7 +67,8 @@ class Aluno extends \yii\db\ActiveRecord
             [['ds_observacao'], 'string', 'max' => 200],
             [['im_foto'], 'string'],
             [['id_convenio'], 'string'],
-            [['id_profissional'], 'integer']
+            [['id_profissional'], 'integer'],
+            [['ds_local_foto'], 'string']
         ];
     }
 
@@ -78,7 +79,7 @@ class Aluno extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'Código do Aluno',
-            'nm_aluno' => 'Nome do Aluno',
+            'nm_aluno' => 'Nome do Aluno/Paciente',
             'ds_cpf' => 'Cpf',
             'dt_nascimento' => 'Data de Nascimento',
             'ds_sexo' => 'Sexo',
@@ -103,46 +104,7 @@ class Aluno extends \yii\db\ActiveRecord
         ];
     }
     
-    public function  getNavBar(){
-        NavBar::begin([
-        'brandLabel' => 'Academia Harmonia Faz Bem',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems[] = ['label' => '<i class="glyphicon glyphicon-user"></i> Search', 'url' => ['/site/search']];
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Cadastros', 'url' => ['/site/index'],
-                'items' => [
-                    ['label' => 'Aluno', 'url' => ['/aluno/index']],
-                    ['label' => 'Profissional', 'url' => ['/profissional/create']],
-                    ['label' => 'Turma', 'url' => ['/aluno/create']],
-                    ['label' => 'Avaliação', 'url' => ['/avaliacao/create']]
-                ]
-            ],
-            ['label' => 'Relatórios', 'url' => ['/site/about'],
-                'items' => [
-                    ['label' => 'Aluno', 'url' => ['/aluno/relatorio']],
-                    ['label' => 'Profissional', 'url' => ['/aluno/create']],
-                    ['label' => 'Turma', 'url' => ['/aluno/create']]
-                ]
-            ],
-            Yii::$app->user->isGuest ?
-                    ['label' => 'Login', 'url' => ['/site/login']] :
-                    [
-                'label' => '<i class="glyphicon glyphicon-user"></i> Sair (' . Yii::$app->user->identity->username . ')',
-                'url' => ['/site/logout'],
-                'linkOptions' => ['data-method' => 'post']
-                    ],
-        ],
-        'encodeLabels' => false,
-    ]);
-
-    NavBar::end();
-    }
+    
     
     public function getEstados(){
         return $estados =  ['MG' => 'MG', 
@@ -200,12 +162,23 @@ class Aluno extends \yii\db\ActiveRecord
                'class' =>TimestampBehavior::className(),
                'attributes' => [
                    ActiveRecord::EVENT_BEFORE_INSERT => ['dt_nascimento'],
-                   ActiveRecord::EVENT_BEFORE_UPDATE => ['dt_nascimento'],
+                   ActiveRecord::EVENT_BEFORE_UPDATE => ['dt_nascimento'],                   
                ],
                'value' => function() { 
            $date = DateTime::createFromFormat('d/m/Y', $this->dt_nascimento);
            return Yii::$app->formatter->asDate($date, 'php:Y-m-d'); }
            ],
+                   
+                   [
+               'class' =>TimestampBehavior::className(),
+               'attributes' => [               
+                    ActiveRecord::EVENT_AFTER_FIND => ['dt_nascimento'],
+                                   
+               ],
+               'value' => function() {          
+            return Yii::$app->formatter->asDate($this->dt_nascimento, 'dd/MM/yyyy'); }
+           ],
+          
        ];
    }
     

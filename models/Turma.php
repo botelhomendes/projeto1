@@ -2,6 +2,7 @@
 
 namespace app\models;
 use yii\helpers\ArrayHelper;
+use yii\db\ActiveRecord;
 
 use Yii;
 
@@ -112,6 +113,7 @@ class Turma extends \yii\db\ActiveRecord
         return ArrayHelper::map($models, 'id_profissional', 'nm_profissional');
 
     }
+    
 }
 
 
