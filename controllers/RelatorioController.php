@@ -2,17 +2,13 @@
 
 namespace app\controllers;
 
-use Yii;
-use Mpdf;
 use app\models\Aluno;
-use app\models\AlunoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use kartik\mpdf\Pdf;
 use TCPDF;
-use app\controllers\AlunoController;
 use DateTime;
+use FPDF;
 
 /**
  * AlunoController implements the CRUD actions for Aluno model.
@@ -204,7 +200,27 @@ class RelatorioController extends Controller {
 //============================================================+
     }
 
+
+public function actionRelatorioalunoavaliacao($id = 3) {
+      
+
+   // chart.getImageURI();// passar o retorno dessa funcao para um hidden ou algo do tipo
+// usando fdpf para gerar o pdf com a imagem
+$pic = $string_js_base64;
+        
+$pdf = new FPDF();
+$pdf->AddPage();
+$pdf->SetFont('Arial','B',16);
+$pdf->Cell(40,10,'Hello Image!');
+$pdf->Image($pic, 10, 30, $tamanho, $largura, 'png');
+$pdf->Output('tmp/doc.pdf');
+    
+    
+    
+    }
+
 }
+
 
 class MYPDF extends TCPDF {
 

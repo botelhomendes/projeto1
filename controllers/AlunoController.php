@@ -61,6 +61,10 @@ class AlunoController extends Controller {
                     'model' => $this->findModel($id),
         ]);
     }
+    
+    public function actionListaalunosrelatorio($id) {
+        return $this->render('listaalunosrelatorio');
+    }
 
     /**
      * Creates a new Aluno model.
