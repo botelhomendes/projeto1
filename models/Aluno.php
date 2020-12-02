@@ -49,10 +49,10 @@ class Aluno extends \yii\db\ActiveRecord
     {
       
         return [
-         //   [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_identidade', 'ds_responsaveis', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_email', 'ds_profissao', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp'], 'required'],  
+           [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_telefone1'], 'required'],  
             
             [['dt_nascimento'], 'date', 'format' => 'dd/MM/yyyy'],
-            [['ds_telefone1', 'ds_telefone2', 'ds_whatsapp', 'id_convenio'], 'integer'],
+            [['id_convenio'], 'integer'],
             [['nm_aluno', 'ds_responsaveis', 'ds_cidade', 'ds_endereco', 'ds_email'], 'string', 'max' => 200],
             [['ds_cpf'], 'string', 'max' => 11],
             [['ds_sexo'], 'string', 'max' => 100],
@@ -60,6 +60,9 @@ class Aluno extends \yii\db\ActiveRecord
             [['ds_estado'], 'string', 'max' => 2],
             [['ds_cep'], 'string', 'max' => 10],
             [['ds_profissao'], 'string', 'max' => 100],
+            [['ds_telefone1'], 'string', 'max' => 15],
+            [['ds_telefone2'], 'string', 'max' => 15],
+            [['ds_whatsapp'], 'string', 'max' => 15],   
             [['id_convenio'], 'integer'],
             [['fl_paciente'], 'string', 'max' => 1],
             [['nr_matricula_conv'], 'integer'],
@@ -91,8 +94,8 @@ class Aluno extends \yii\db\ActiveRecord
             'ds_cep' => 'Cep',
             'ds_email' => 'Email',
             'ds_profissao' => 'Profissao',
-            'ds_telefone1' => 'Telefone 1',
-            'ds_telefone2' => 'Telefone 2',
+            'ds_telefone1' => 'Telefone Fixo',
+            'ds_telefone2' => 'Telefone Celular',
             'ds_whatsapp' => 'Whatsapp',
             'id_convenio' => 'Convênio',
             'fl_paciente' => 'Paciente',
