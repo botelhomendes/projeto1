@@ -8,8 +8,8 @@ use yii\helpers\ArrayHelper;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use DateTime;
-
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "tb_aluno".
@@ -31,26 +31,27 @@ use Yii;
  * @property int $ds_telefone2
  * @property int $ds_whatsapp
  * @property int $id_convenio
+ * @property int $id_profissional
+ * @property string $ds_local_foto
  */
-class Aluno extends \yii\db\ActiveRecord
-{
+class Aluno extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'tb_aluno';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
-      
+    public function rules() {
+
         return [
-           [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_telefone1'], 'required'],  
-            
+            //   [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_identidade', 'ds_responsaveis', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_email', 'ds_profissao', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp'], 'required'],  
+         //   [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_identidade', 'ds_responsaveis', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_email', 'ds_profissao', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp'], 'required'],             
+           [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_telefone1'], 'required'],            
             [['dt_nascimento'], 'date', 'format' => 'dd/MM/yyyy'],
             [['id_convenio'], 'integer'],
             [['nm_aluno', 'ds_responsaveis', 'ds_cidade', 'ds_endereco', 'ds_email'], 'string', 'max' => 200],
@@ -69,17 +70,16 @@ class Aluno extends \yii\db\ActiveRecord
             [['dt_validade'], 'date', 'format' => 'yyyy-MM-dd'],
             [['ds_observacao'], 'string', 'max' => 200],
             [['im_foto'], 'string'],
-            [['id_convenio'], 'string'],
+            // [['id_convenio'], 'string'],
             [['id_profissional'], 'integer'],
-            [['ds_local_foto'], 'string']
+            [['ds_local_foto'], 'string', 'max' => 200]
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'Código do Aluno',
             'nm_aluno' => 'Nome do Aluno/Paciente',
@@ -102,87 +102,93 @@ class Aluno extends \yii\db\ActiveRecord
             'nr_matricula_conv' => 'Matrícula',
             'dt_validade' => 'Validade',
             'ds_observacao' => 'Observação',
-            'im_foto' => 'Foto',            
-            'id_profissional' => 'Profissional'
+            'im_foto' => 'Foto',
+            'id_profissional' => 'Profissional',
+            'ds_local_foto' => 'Foto'
         ];
     }
-    
-    
-    
-    public function getEstados(){
-        return $estados =  ['MG' => 'MG', 
-                            'AC' => 'AC', 
-                            'AL' => 'AC', 
-                            'AM' => 'AM',
-                            'AP' => 'AP',
-                            'BA' => 'BA', 
-                            'CE' => 'CE', 
-                            'DF' => 'DF', 
-                            'ES' => 'ES', 
-                            'GO' => 'GO', 
-                            'MA' => 'MA',  
-                            'MT' => 'MT', 
-                            'MS' => 'MS',                             
-                            'PA' => 'PA', 
-                            'PB' => 'PB', 
-                            'PR' => 'PR',   
-                            'PE' => 'PE', 
-                            'PI' => 'PI', 
-                            'RJ' => 'RJ', 
-                            'RN' => 'RN', 
-                            'RO' => 'RO', 
-                            'RS' => 'RS', 
-                            'RR' => 'RR', 
-                            'SC' => 'SC', 
-                            'SE' => 'SE', 
-                            'SP' => 'SP', 
-                            'TO' => 'TO'];
-    }
-    
-      public function getDataListConvenio() { // could be a static func as well
-       
-        $models = Convenio::find()->asArray()->all();
-        array_unshift ($models, new Convenio);
-        return ArrayHelper::map($models, 'id', 'ds_nome');
 
+    public function getEstados() {
+        return $estados = ['MG' => 'MG',
+            'AC' => 'AC',
+            'AL' => 'AC',
+            'AM' => 'AM',
+            'AP' => 'AP',
+            'BA' => 'BA',
+            'CE' => 'CE',
+            'DF' => 'DF',
+            'ES' => 'ES',
+            'GO' => 'GO',
+            'MA' => 'MA',
+            'MT' => 'MT',
+            'MS' => 'MS',
+            'PA' => 'PA',
+            'PB' => 'PB',
+            'PR' => 'PR',
+            'PE' => 'PE',
+            'PI' => 'PI',
+            'RJ' => 'RJ',
+            'RN' => 'RN',
+            'RO' => 'RO',
+            'RS' => 'RS',
+            'RR' => 'RR',
+            'SC' => 'SC',
+            'SE' => 'SE',
+            'SP' => 'SP',
+            'TO' => 'TO'];
+    }
+
+    public function getDataListConvenio() { // could be a static func as well
+        $models = Convenio::find()->asArray()->all();
+        array_unshift($models, new Convenio);
+        return ArrayHelper::map($models, 'id', 'ds_nome');
     }
 
     public function getDataListProfissional() { // could be a static func as well
-        
-                      
         $models = Profissional::find()->asArray()->all();
-        array_unshift ($models, new Profissional);
+        array_unshift($models, new Profissional);
         return ArrayHelper::map($models, 'id_profissional', 'nm_profissional');
-
     }
-    
-    
-    
-   public function behaviors()
-   {
-       return [
-           [
-               'class' =>TimestampBehavior::className(),
-               'attributes' => [
-                   ActiveRecord::EVENT_BEFORE_INSERT => ['dt_nascimento'],
-                   ActiveRecord::EVENT_BEFORE_UPDATE => ['dt_nascimento'],                   
-               ],
-               'value' => function() { 
-           $date = DateTime::createFromFormat('d/m/Y', $this->dt_nascimento);
-           return Yii::$app->formatter->asDate($date, 'php:Y-m-d'); }
-           ],
-                   
-                   [
-               'class' =>TimestampBehavior::className(),
-               'attributes' => [               
+
+    public function behaviors() {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['dt_nascimento'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['dt_nascimento'],
+                ],
+                'value' => function() {
+                    $date = DateTime::createFromFormat('d/m/Y', $this->dt_nascimento);
+                    return Yii::$app->formatter->asDate($date, 'php:Y-m-d');
+                }
+            ],
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
                     ActiveRecord::EVENT_AFTER_FIND => ['dt_nascimento'],
-                                   
-               ],
-               'value' => function() {          
-            return Yii::$app->formatter->asDate($this->dt_nascimento, 'dd/MM/yyyy'); }
-           ],
-          
-       ];
-   }
+                ],
+                'value' => function() {
+                    return Yii::$app->formatter->asDate($this->dt_nascimento, 'dd/MM/yyyy');
+                }
+            ],
+        ];
+    }
+
+   /* public function afterSave($insert, $changedAttributes) {
+        if (isset($this->ds_local_foto)) {
+            $this->ds_local_foto = UploadedFile::getInstance($this, 'ds_local_foto');
+            if (is_object($this->ds_local_foto)) {
+                $path = Yii::$app->basePath . '\\views\\uploads\\';  //set directory path to save image
+                $this->ds_local_foto->saveAs($path . $this->id . "_" . $this->ds_local_foto);   //saving img in folder
+                $this->ds_local_foto = $this->id . "_" . $this->ds_local_foto;    //appending id to image name            
+                \Yii::$app->db->createCommand()
+                        ->update('aluno', ['ds_local_foto' => $this->ds_local_foto], 'id = "' . $this->id . '"')
+                        ->execute(); //manually update image name to db
+            }
+        }
+    }*/
+
     
+
 }
