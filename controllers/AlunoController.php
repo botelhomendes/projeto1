@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use kartik\date\DatePicker;
 use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
 
 /**
  * AlunoController implements the CRUD actions for Aluno model.
@@ -26,11 +27,11 @@ class AlunoController extends Controller {
         $model = new Aluno();
         return [
             'verbs' => [
-                         'class' => VerbFilter::className(),
-                          'actions' => [
-                            'delete' => ['POST'],
-                           ],
-                       ],          
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
         ];
     }
 
@@ -61,7 +62,7 @@ class AlunoController extends Controller {
                     'model' => $this->findModel($id),
         ]);
     }
-    
+
     public function actionListaalunosrelatorio($id) {
         return $this->render('listaalunosrelatorio');
     }
@@ -75,15 +76,29 @@ class AlunoController extends Controller {
         $model = new Aluno();
         $searchModel = new AlunoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
+            $idAluno = $model->id;
+            $foto = UploadedFile::getInstance($model, 'ds_local_foto');
+            
+            $fotoName = 'aluno_'.$idAluno.'.'.$foto->getExtension();
+                 //$path = Yii::getAlias('@uploads') . '/uploads/' . $file->name;                           
+            $path = Yii::getAlias('@app') . '/views/uploads/'.$fotoName;
+            $foto->saveAs($path);
+            $model->ds_local_foto = $fotoName;
+            $model->save();
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
+        
+        
 
         return $this->render('create', [
                     'model' => $model,
                     'dataProvider' => $dataProvider,
                     'searchModel' => $searchModel,
-        ]);
+        ]);                     
+        
     }
 
     public function actionRelatorio() {
@@ -160,5 +175,7 @@ class AlunoController extends Controller {
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    
 
 }
