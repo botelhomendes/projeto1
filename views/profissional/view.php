@@ -6,25 +6,15 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Profissional */
 
-$this->title = $model->id_profissional;
-$this->params['breadcrumbs'][] = ['label' => 'Profissionals', 'url' => ['index']];
+$this->title  = 'Visualizar Profissional';;
+$this->params['breadcrumbs'][] = ['label' => 'Profissional', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="profissional-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id_profissional], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id_profissional], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -35,5 +25,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'nr_registro',
         ],
     ]) ?>
+    
+        <p>
+        <?= Html::a('Alterar', ['update', 'id' => $model->id_profissional], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Excluir', ['delete', 'id' => $model->id_profissional], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Deseja Excluir o Registro?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
 
 </div>

@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="col-md-6">           
             <?php $accountStatus1 = array() ?>
-            <?= $form->field($model, 'tp_registro')->dropDownList($accountStatus1,[ 'style' => 'width:400px']) ?>
+            <?= $form->field($model, 'tp_registro')->dropDownList($model->getTipoRegistro(),[ 'style' => 'width:400px']) ?>
         </div>
     </div>
     <div class="row">

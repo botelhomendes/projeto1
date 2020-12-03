@@ -23,7 +23,7 @@ $this->title = 'Pesquisar Convênio';
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'id_convenio',
+            'id',
             'ds_nome',
             'nr_registro_ans',
          //   'cd_operadora',

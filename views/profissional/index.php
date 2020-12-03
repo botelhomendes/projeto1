@@ -25,7 +25,7 @@ use yii\grid\GridView;;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_profissional',
+       //     'id_profissional',
             'nm_profissional',
             'tp_registro',
             'nr_registro',
@@ -33,6 +33,11 @@ use yii\grid\GridView;;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    <div class="form-group">
+<?= Html::a('Cadastrar', ['/profissional/create'], ['class' => 'btn btn-primary']) ?>
+
+
+    </div>
 
 
 </div>

@@ -5,10 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Profissional */
 
-$this->title = 'Update Profissional: ' . $model->id_profissional;
-$this->params['breadcrumbs'][] = ['label' => 'Profissionals', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id_profissional, 'url' => ['view', 'id' => $model->id_profissional]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Alterar Profissional';
+$this->params['breadcrumbs'][] = ['label' => 'Profissional', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="profissional-update">
 

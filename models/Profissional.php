@@ -56,6 +56,11 @@ class Profissional extends \yii\db\ActiveRecord
             'nr_registro' => 'Número do Registro',
         ];
     }
+    
+    public function getTipoRegistro(){
+        return $estados =  ['CR' => 'CREF', 
+                            'CO' => 'CONFEF'];
+    }
 
     /**
      * Gets query for [[TbEspecialidadeProfissionals]].

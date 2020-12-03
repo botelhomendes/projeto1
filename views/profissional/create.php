@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $searchModel app\models\ProfissionalSearch */
 
 $this->title = 'Cadastrar Profissional';
-$this->params['breadcrumbs'][] = ['label' => 'Profissionais', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Profissional', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="profissional-create">
