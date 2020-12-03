@@ -33,6 +33,8 @@ use yii\web\UploadedFile;
  * @property int $id_convenio
  * @property int $id_profissional
  * @property string $ds_local_foto
+ * @property string $filename
+ * @property array $avatar 
  */
 class Aluno extends \yii\db\ActiveRecord {
 
@@ -46,12 +48,14 @@ class Aluno extends \yii\db\ActiveRecord {
     /**
      * {@inheritdoc}
      */
+    
+    public $image;
     public function rules() {
 
         return [
             //   [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_identidade', 'ds_responsaveis', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_email', 'ds_profissao', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp'], 'required'],  
          //   [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_identidade', 'ds_responsaveis', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_email', 'ds_profissao', 'ds_telefone1', 'ds_telefone2', 'ds_whatsapp'], 'required'],             
-           [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep', 'ds_telefone1'], 'required'],            
+           [['nm_aluno', 'ds_cpf', 'dt_nascimento', 'ds_sexo', 'ds_estado', 'ds_cidade', 'ds_endereco', 'ds_cep'], 'required'],            
             [['dt_nascimento'], 'date', 'format' => 'dd/MM/yyyy'],
             [['id_convenio'], 'integer'],
             [['nm_aluno', 'ds_responsaveis', 'ds_cidade', 'ds_endereco', 'ds_email'], 'string', 'max' => 200],
@@ -63,16 +67,17 @@ class Aluno extends \yii\db\ActiveRecord {
             [['ds_profissao'], 'string', 'max' => 100],
             [['ds_telefone1'], 'string', 'max' => 15],
             [['ds_telefone2'], 'string', 'max' => 15],
-            [['ds_whatsapp'], 'string', 'max' => 15],   
-            [['id_convenio'], 'integer'],
-            [['fl_paciente'], 'string', 'max' => 1],
+            [['ds_whatsapp'], 'string', 'max' => 15],               
+            [['fl_paciente'], 'string', 'max' => 10],
             [['nr_matricula_conv'], 'integer'],
-            [['dt_validade'], 'date', 'format' => 'yyyy-MM-dd'],
+            [['dt_validade'], 'date', 'format' => 'dd/MM/yyyy'],
             [['ds_observacao'], 'string', 'max' => 200],
             [['im_foto'], 'string'],
             // [['id_convenio'], 'string'],
             [['id_profissional'], 'integer'],
-            [['ds_local_foto'], 'string', 'max' => 200]
+            [['image'], 'safe'],
+            [['image'], 'file', 'extensions'=>'jpg, gif, png, jpeg, JPG, JPEG'],           
+             [['ds_local_foto'], 'string', 'max' => 200]
         ];
     }
 
@@ -172,6 +177,44 @@ class Aluno extends \yii\db\ActiveRecord {
                     return Yii::$app->formatter->asDate($this->dt_nascimento, 'dd/MM/yyyy');
                 }
             ],
+                     [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['dt_validade'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['dt_validade'],
+                ],
+                'value' => function() {
+                    $date = DateTime::createFromFormat('d/m/Y', $this->dt_validade);
+                    return Yii::$app->formatter->asDate($date, 'php:Y-m-d');
+                }
+            ],
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_AFTER_FIND => ['dt_validade'],
+                ],
+                'value' => function() {
+                if($this->dt_validade != null){
+                    return Yii::$app->formatter->asDate($this->dt_validade, 'dd/MM/yyyy');
+                }else{
+                    return null;
+                }
+                }
+            ],
+           /* [
+                'class' => Aluno::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_AFTER_FIND => ['fl_paciente'],
+                ],
+                'value' => function() {
+                if($this->fl_paciente == 0){
+                    return  $this->fl_paciente = 'Não';
+                }else{
+                    return  $this->fl_paciente = 'Sim';
+                }
+                    
+                }
+            ],*/
         ];
     }
 
