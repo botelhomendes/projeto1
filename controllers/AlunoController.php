@@ -63,8 +63,11 @@ class AlunoController extends Controller {
         ]);
     }
 
-    public function actionListaalunosrelatorio($id) {
-        return $this->render('listaalunosrelatorio');
+    public function actionListaalunosrelatorio() {
+        $searchModel = new AlunoSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('listaalunosrelatorio',   ['searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,]);
     }
 
     /**
@@ -72,12 +75,12 @@ class AlunoController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate() {
+  /*  public function actionCreate() {
         $model = new Aluno();
         $searchModel = new AlunoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        if ($model->load(Yii::$app->request->post())) {
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+           // $model->save();
             $idAluno = $model->id;
             $foto = UploadedFile::getInstance($model, 'ds_local_foto');
             
@@ -99,6 +102,36 @@ class AlunoController extends Controller {
                     'searchModel' => $searchModel,
         ]);                     
         
+    }*/
+    
+     public function actionCreate()
+    {
+        $model = new Aluno();
+        if ($model->load(Yii::$app->request->post())) {
+            // get the uploaded file instance. for multiple file uploads
+            // the following data will return an array
+            
+            $image = UploadedFile::getInstance($model, 'image');
+            if($image <> null){
+          
+                 $fotoName = 'aluno_'. Yii::$app->security->generateRandomString().'.'.$image->getExtension();
+          
+                 $path = Yii::$app->basePath . '\\web\\images\\'. $fotoName;
+                 $model->filename = $fotoName;
+                if($model->save()){
+                    $image->saveAs($path);
+                     return $this->redirect(['view', 'id'=>$model->id]);
+                } else {
+                    echo print_r($model->getErrors());
+                  }
+            } else {
+                $model->save();
+                return $this->redirect(['view', 'id'=>$model->id]);
+            }
+        }
+        return $this->render('create', [
+            'model'=>$model,
+        ]);
     }
 
     public function actionRelatorio() {

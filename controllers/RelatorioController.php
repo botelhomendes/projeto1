@@ -65,6 +65,12 @@ class RelatorioController extends Controller {
       'model' => $this,
       ]);
       } */
+    
+    public function actionIndex($id){
+       return $this->render('relatorioalunoindividual', [
+      'model' => $this, 'id' => $id,
+      ]);
+    }
 
     public function actionRelatorioalunoindividual($id = 3) {
         $aluno = Aluno::findOne($id);
