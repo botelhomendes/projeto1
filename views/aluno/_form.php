@@ -3,13 +3,17 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
-
+use kartik\file\FileInput;
+use yii\helpers\Url;
+    
+  
 /* @var $this yii\web\View */
 
 /* @var $model app\models\Aluno */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <?php
+$exibe = false;
 $script = <<< JS
 $(function() {       
         $('#profissional').hide();
@@ -24,7 +28,9 @@ $('#paciente').change(function() {
    
     var ccexists = $("#paciente").prop("checked") ? true : false;
     if (ccexists == true) {
+         
         $('#profissional').show();
+         
       
     } else {
        
@@ -115,7 +121,8 @@ $this->registerJs($script);
         </div>
 
         <div class="col-md-3">
-            <?= $form->field($model, 'dt_validade')->textInput(['style' => 'width:100px']) ?>
+               <?= $form->field($model, 'dt_validade', ['options' => ['style' => 'width: 250px']])->widget(\kartik\date\DatePicker::className(), ['pluginOptions' => ['format' => 'dd/mm/yyyy'], 'language' => 'pt-BR']) ?>
+          
         </div>
     </div>
 
@@ -123,32 +130,40 @@ $this->registerJs($script);
         <div class="col-md-6">
             <?= $form->field($model, 'ds_observacao')->textarea(['style' => 'width:400px']) ?>
         </div>
-        <div class="col-md-6">
-            <?= $form->field($model, 'im_foto')->fileInput() ?>
-        </div>
-
-    </div>
-
-    <div class="row">
         <div class="col-md-2">           
             <?=
-            $form->field($model, 'fl_paciente')->checkbox(['value' => 'S',
+            $form->field($model, 'fl_paciente')->checkbox(['value' => '1',
                 'id' => 'paciente'])
             ?>
         </div>
 
         <div class="col-md-2">     
-            <?php $items = $model->getDataListProfissional(); ?>
+            <?php $items = $model->getDataListProfissional();  ?>
             <?= $form->field($model, 'id_profissional')->dropDownList($items, ['id' => 'profissional', 'style' => 'width:300px']) ?>               
         </div>
+
     </div>
 
     <div class="row">
-        <div class="col-md-3">
+
+         <div class="col-md-6">
+             <?= $form->field($model, 'image')->widget(\kartik\file\FileInput::className(), 
+                       ['pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png']]]);
+                    
+                    ?>
+        </div>
+          
+    </div>
+
+    <div class="row"> 
+        
+         <div class="col-md-3">
             <div class="form-group">                                
                 <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
             </div>
-        </div>         
+        </div> 
+       
+     
     </div>
     <?php ActiveForm::end(); ?>
 
