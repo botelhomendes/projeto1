@@ -12,6 +12,8 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\Aluno */
 /* @var $form ActiveForm */
+$this->title = 'Pesquisar Aluno';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="aluno-index">
  
@@ -25,13 +27,13 @@ use yii\helpers\Url;
             'ds_cpf',
             ['class' => 'yii\grid\ActionColumn',
                 'template' => '{view}{create}',
-                'visible' => Yii::$app->user->isGuest ? false : true,
+              //  'visible' => Yii::$app->user->isGuest ? false : true,
             ],
         ],        
     ]);
     ?>
     <div class="form-group">
-<?= Html::a('Cadastrar', ['/aluno/create'], ['class' => 'btn btn-primary']) ?>
+<?= Html::a('Cadastrar', ['/aluno/create'], ['class' => 'btn btn-success']) ?>
 
 
     </div>

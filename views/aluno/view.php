@@ -89,8 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'ds_profissao',            
             'ds_whatsapp',
             'nr_matricula_conv',
-            'dt_validade',
-             
+            'dt_validade',             
              ]
              ]);
 
