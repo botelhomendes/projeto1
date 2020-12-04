@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Turma */
 
-$this->title = $model->id_turma;
+$this->title = $model->nm_turma;
 $this->params['breadcrumbs'][] = ['label' => 'Turmas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+        'template' => "<tr><th  style='width:250px'>{label}</th><td>{value}</td></tr>",
         'attributes' => [
             'id_turma',
             'nm_turma',

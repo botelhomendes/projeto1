@@ -8,6 +8,7 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Pesquisar Turma';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="turma-index">
 
@@ -19,7 +20,7 @@ $this->title = 'Pesquisar Turma';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+           
 
             'id_turma',
             'nm_turma',
@@ -36,7 +37,7 @@ $this->title = 'Pesquisar Turma';
         ],
     ]); ?>
     <div class="form-group">
-         <?= Html::a('Cadastrar', ['/turma/create'], ['class'=>'btn btn-primary']) ?>
+         <?= Html::a('Cadastrar', ['/turma/create'], ['class'=>'btn btn-success']) ?>
         
         
     </div>

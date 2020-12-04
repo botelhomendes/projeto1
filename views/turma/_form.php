@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
+use yii\widgets\MaskedInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Turma */
@@ -33,24 +35,25 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <?= $form->field($model, 'nr_vagas')->textInput(['maxlength' => true, 'style' => 'width:80px']) ?>  
         </div> 
-        <div class="col-md-3">
-            <?= $form->field($model, 'hr_inicio')->textInput(['maxlength' => true, 'style' => 'width:90px']) ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'hr_inicio', ['options' => ['style' => 'width: 110px']])->widget(MaskedInput::className(),['mask' => '99:99']) ?>            
             
         </div>
-        <div class="col-md-3">
-            <?= $form->field($model, 'hr_fim')->textInput(['maxlength' => true, 'style' => 'width:90px']) ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'hr_fim', ['options' => ['style' => 'width: 110px']])->widget(MaskedInput::className(),['mask' => '99:99']) ?>            
         </div>
     </div>
     
     <div class="row">
-        <div class="col-md-2">
-            <?= $form->field($model, 'dt_inicio')->textInput() ?>
+        <div class="col-md-3">
+            <?= $form->field($model, 'dt_inicio', ['options' => ['style' => 'width: 250px']])->widget(DatePicker::className(), ['pluginOptions' => ['format' => 'dd/mm/yyyy'], 'language' => 'pt-BR']) ?>            
         </div>
-        <div class="col-md-2">
-             <?= $form->field($model, 'dt_fim')->textInput() ?>
+        <div class="col-md-3">
+             <?= $form->field($model, 'dt_fim', ['options' => ['style' => 'width: 250px']])->widget(DatePicker::className(), ['pluginOptions' => ['format' => 'dd/mm/yyyy'], 'language' => 'pt-BR']) ?>            
+             
 
         </div>
     </div>  
