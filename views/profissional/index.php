@@ -12,8 +12,10 @@ use yii\grid\GridView;;
 /* @var $searchModel app\models\ProfissionalSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $model app\models\Profissional */
-
+$this->title = 'Pesquisar Profissional';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="aluno-index">
 
 
@@ -23,14 +25,17 @@ use yii\grid\GridView;;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+           
 
        //     'id_profissional',
             'nm_profissional',
             'tp_registro',
             'nr_registro',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{view}{create}',
+              //  'visible' => Yii::$app->user->isGuest ? false : true,
+            ],
         ],
     ]); ?>
     <div class="form-group">
@@ -41,3 +46,4 @@ use yii\grid\GridView;;
 
 
 </div>
+<?= Html::a('Cadastrar', ['create'], ['class' => 'btn btn-success']) ?>
