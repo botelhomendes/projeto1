@@ -70,40 +70,7 @@ class AlunoController extends Controller {
                     'dataProvider' => $dataProvider,]);
     }
 
-    /**
-     * Creates a new Aluno model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-  /*  public function actionCreate() {
-        $model = new Aluno();
-        $searchModel = new AlunoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-           // $model->save();
-            $idAluno = $model->id;
-            $foto = UploadedFile::getInstance($model, 'ds_local_foto');
-            
-            $fotoName = 'aluno_'.$idAluno.'.'.$foto->getExtension();
-                 //$path = Yii::getAlias('@uploads') . '/uploads/' . $file->name;                           
-            $path = Yii::getAlias('@app') . '/views/uploads/'.$fotoName;
-            $foto->saveAs($path);
-            $model->ds_local_foto = $fotoName;
-            $model->save();
-
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-        
-        
-
-        return $this->render('create', [
-                    'model' => $model,
-                    'dataProvider' => $dataProvider,
-                    'searchModel' => $searchModel,
-        ]);                     
-        
-    }*/
-    
+   
      public function actionCreate()
     {
         $model = new Aluno();
@@ -172,8 +139,24 @@ class AlunoController extends Controller {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+           $image = UploadedFile::getInstance($model, 'image');
+            if($image <> null){
+          
+                 $fotoName = 'aluno_'. Yii::$app->security->generateRandomString().'.'.$image->getExtension();
+          
+                 $path = Yii::$app->basePath . '\\web\\images\\'. $fotoName;
+                 $model->filename = $fotoName;
+                if($model->save()){
+                    $image->saveAs($path);
+                     return $this->redirect(['view', 'id'=>$model->id]);
+                } else {
+                    echo print_r($model->getErrors());
+                  }
+            } else {
+                $model->save();
+                return $this->redirect(['view', 'id'=>$model->id]);
+            }
         }
 
         return $this->render('update', [
