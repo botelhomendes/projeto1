@@ -43,7 +43,7 @@ AppAsset::register($this);
             ['label' => 'Cadastros', 'url' => ['/site/index'],
                 'items' => [
                     ['label' => 'Aluno/Paciente', 'url' => ['/aluno/index']],
-                    ['label' => 'Profissional', 'url' => ['/profissional/create']],
+                    ['label' => 'Profissional', 'url' => ['/profissional/index']],
                     ['label' => 'Especialidade', 'url' => ['/especialidade/index']],
                     ['label' => 'Turma', 'url' => ['/turma/index']],
                     ['label' => 'TurmaXAluno', 'url' => ['/turmaaluno/index']],
