@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
              <?= $form->field($model, 'nm_profissional')->textInput(['maxlength' => true, 'style' => 'width:550px']) ?>
         </div>
         <div class="col-md-6">           
-            <?php $accountStatus1 = array() ?>
+            <?php $accountStatus1 = ['CREFITO' => 'CREFITO', 'CRM' => 'CRM'] ?>
             <?= $form->field($model, 'tp_registro')->dropDownList($model->getTipoRegistro(),[ 'style' => 'width:400px']) ?>
         </div>
     </div>
