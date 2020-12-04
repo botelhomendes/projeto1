@@ -42,10 +42,10 @@ class Especialidade extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_especialidade' => 'Id Especialidade',
-            'nm_especialidade' => 'Nm Especialidade',
-            'nr_tempo_duracao' => 'Nr Tempo Duracao',
-            'id_especialidade_profissional' => 'Id Especialidade Profissional',
+            'id_especialidade' => 'Código da Especialidade',
+            'nm_especialidade' => 'Nome Especialidade',
+            'nr_tempo_duracao' => 'Tempo de Duração (minutos)',
+            'id_especialidade_profissional' => 'Especialidade x Profissional',
         ];
     }
 
@@ -56,7 +56,7 @@ class Especialidade extends \yii\db\ActiveRecord
      */
     public function getTbEspecialidadeProfissionals()
     {
-        return $this->hasMany(TbEspecialidadeProfissional::className(), ['id_especialidade' => 'id_especialidade_profissional']);
+        return $this->hasMany(EspecialidadeProfissional::className(), ['id_especialidade' => 'id_especialidade_profissional']);
     }
 
     /**
@@ -66,6 +66,6 @@ class Especialidade extends \yii\db\ActiveRecord
      */
     public function getTbTurmas()
     {
-        return $this->hasMany(TbTurma::className(), ['id_especialidade' => 'id_especialidade']);
+        return $this->hasMany(Turma::className(), ['id_especialidade' => 'id_especialidade']);
     }
 }

@@ -116,7 +116,7 @@ class Aluno extends \yii\db\ActiveRecord {
     public function getEstados() {
         return $estados = ['MG' => 'MG',
             'AC' => 'AC',
-            'AL' => 'AC',
+            'AL' => 'AL',
             'AM' => 'AM',
             'AP' => 'AP',
             'BA' => 'BA',

@@ -3,6 +3,8 @@
 namespace app\models;
 use yii\helpers\ArrayHelper;
 use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
+use DateTime;
 
 use Yii;
 
@@ -40,6 +42,7 @@ class Turma extends \yii\db\ActiveRecord
     {
         return [
             [['nm_turma', 'ds_turno', 'nr_vagas', 'hr_inicio', 'hr_fim', 'dt_inicio', 'dt_fim', 'id_profissional', 'id_especialidade'], 'required'],
+            [['dt_inicio', 'dt_fim'], 'date', 'format' => 'dd/MM/yyyy'],
             [['nr_vagas', 'id_profissional', 'id_especialidade'], 'integer'],
             [['hr_inicio', 'hr_fim', 'dt_inicio', 'dt_fim'], 'safe'],
             [['nm_turma'], 'string', 'max' => 200],
@@ -114,6 +117,65 @@ class Turma extends \yii\db\ActiveRecord
 
     }
     
+    
+    public function behaviors() {
+        return [
+           
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['dt_inicio'],                  
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['dt_inicio'],
+                    
+                ],
+                'value' => function() {
+                    $date = DateTime::createFromFormat('d/m/Y', $this->dt_inicio);
+                    return Yii::$app->formatter->asDate($date, 'php:Y-m-d');
+                }
+            ],
+                    
+             [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [                                  
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['dt_fim'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['dt_fim'],                                                            
+                ],
+                'value' => function() {
+                    $date = DateTime::createFromFormat('d/m/Y', $this->dt_fim);
+                    return Yii::$app->formatter->asDate($date, 'php:Y-m-d');
+                }
+            ],      
+     
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_AFTER_FIND => ['dt_inicio'],
+                ],
+                'value' => function() {
+                if($this->dt_inicio != null){
+                    return Yii::$app->formatter->asDate($this->dt_inicio, 'dd/MM/yyyy');
+                }else{
+                    return null;
+                }
+                }
+            ],
+                    
+                     [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_AFTER_FIND => ['dt_fim'],
+                ],
+                'value' => function() {
+                if($this->dt_fim != null){
+                    return Yii::$app->formatter->asDate($this->dt_fim, 'dd/MM/yyyy');
+                }else{
+                    return null;
+                }
+                }
+            ],
+          
+        ];
+    }
 }
 
 
