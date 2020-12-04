@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\EspecialidadeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Especialidades';
+$this->title = 'Pesquisar Especialidades';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="especialidade-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Especialidade', ['create'], ['class' => 'btn btn-success']) ?>
+        
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -28,8 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id_especialidade',
             'nm_especialidade',
-            'nr_tempo_duracao',
-            'id_especialidade_profissional',
+            'nr_tempo_duracao',            
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
@@ -37,3 +36,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 </div>
+<?= Html::a('Cadastrar', ['create'], ['class' => 'btn btn-success']) ?>
+
