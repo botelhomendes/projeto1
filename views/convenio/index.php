@@ -8,6 +8,7 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Pesquisar Convênio';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="convenio-index">
 
