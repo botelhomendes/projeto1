@@ -111,7 +111,7 @@ class RelatorioController extends Controller {
         $pdf->SetFont('helvetica', '', 14);
 // add a page
         $pdf->AddPage();
-
+        
         if ($aluno->fl_paciente === '1') {
             $usuario = 'Paciente';
         } else {
@@ -143,24 +143,39 @@ class RelatorioController extends Controller {
         } else {
             $mes = $interval->format('%Y anos e %m meses');
         }
-
+        
         $idade = 'Idade: ' . $mes;
         $sexo = 'Sexo: ' . $aluno->ds_sexo;
         $cpf = 'CPF: ' . $aluno->ds_cpf;
         $identidade = 'Identidade: ' . $aluno->ds_identidade;
+        $profissao = 'Profissão: ' . $aluno->ds_profissao;
         $responsavel = 'Responsável: ' . $aluno->ds_responsaveis;
+        $convenio = 'Convênio: ' . $aluno->id_convenio;
+        $matricula = 'Matrícula:' . $aluno->nr_matricula_conv;
+        $validade = 'Validade:' . $aluno->dt_validade;
+        $observacao = 'Observação: ' . $aluno->ds_observacao;
+        
 
 // print some rows just as example
         // Multicell test
         $pdf->MultiCell(164, 7, $nome, 1, 'L', 0, 0, '', '', true);
         $pdf->Ln(7);
-        $pdf->MultiCell(82, 7, $dataNascimento, 1, 'L', 0, 0, '', '', true);
-        $pdf->MultiCell(82, 7, $idade, 1, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(54, 7, $dataNascimento, 1, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(56, 7, $idade, 1, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(54, 7, $sexo, 1, 'L', 0, 0, '', '', true);
         $pdf->Ln(7);
         $pdf->MultiCell(82, 7, $cpf, 1, 'L', 0, 0, '', '', true);
         $pdf->MultiCell(82, 7, $identidade, 1, 'L', 0, 0, '', '', true);
         $pdf->Ln(7);
+        $pdf->MultiCell(164, 7, $profissao, 1, 'L', 0, 0, '', '', true);
+        $pdf->Ln(7);
         $pdf->MultiCell(164, 7, $responsavel, 1, 'L', 0, 0, '', '', true);
+        $pdf->Ln(7);
+        $pdf->MultiCell(54, 7, $convenio, 1, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(56, 7, $matricula, 1, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(54, 7, $validade, 1, 'L', 0, 0, '', '', true);
+        $pdf->Ln(7);
+        $pdf->MultiCell(164, 7, $observacao, 1, 'L', 0, 0, '', '', true);
 
         $pdf->Ln(15);
 
@@ -177,7 +192,7 @@ class RelatorioController extends Controller {
         $cep = 'Cep: ' . $aluno->ds_cep;
         $telefone = 'Telefone: ' . $aluno->ds_telefone1;
         $zap = 'WhastsApp: ' . $aluno->ds_whatsapp;
-
+        $email = 'E-mail:' .$aluno->ds_email;
 
         $pdf->MultiCell(164, 7, $endereco, 1, 'L', 0, 0, '', '', true);
         $pdf->Ln(7);
@@ -188,6 +203,7 @@ class RelatorioController extends Controller {
         $pdf->MultiCell(82, 7, $telefone, 1, 'L', 0, 0, '', '', true);
         $pdf->MultiCell(82, 7, $zap, 1, 'L', 0, 0, '', '', true);
         $pdf->Ln(7);
+        $pdf->MultiCell(164, 7, $email, 1, 'L', 0, 0, '', '', true);
 
         //   $pdf->MultiRow('Row ' . ($i + 1), $idade . "\n");
 // reset pointer to the last page
