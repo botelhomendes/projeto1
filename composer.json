@@ -25,7 +25,8 @@
         "kartik-v/yii2-mpdf": "*",
         "kartik-v/yii2-widget-datepicker": "^1.4",		
         "iiifx-production/yii2-autocomplete-helper": "^2.0",
-        "bsadnu/yii2-googlecharts": "^1.2"
+        "bsadnu/yii2-googlecharts": "^1.2",
+        "kartik-v/yii2-widget-fileinput": "^1.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
