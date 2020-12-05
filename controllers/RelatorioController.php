@@ -148,12 +148,7 @@ class RelatorioController extends Controller {
         $sexo = 'Sexo: ' . $aluno->ds_sexo;
         $cpf = 'CPF: ' . $aluno->ds_cpf;
         $identidade = 'Identidade: ' . $aluno->ds_identidade;
-        $profissao = 'Profissão: ' . $aluno->ds_profissao;
         $responsavel = 'Responsável: ' . $aluno->ds_responsaveis;
-        $convenio = 'Convênio: ' . $aluno->id_convenio;
-        $matricula = 'Matrícula:' . $aluno->nr_matricula_conv;
-        $validade = 'Validade:' . $aluno->dt_validade;
-        $observacao = 'Observação: ' . $aluno->ds_observacao;
         
 
 // print some rows just as example
@@ -167,21 +162,14 @@ class RelatorioController extends Controller {
         $pdf->MultiCell(82, 7, $cpf, 1, 'L', 0, 0, '', '', true);
         $pdf->MultiCell(82, 7, $identidade, 1, 'L', 0, 0, '', '', true);
         $pdf->Ln(7);
-        $pdf->MultiCell(164, 7, $profissao, 1, 'L', 0, 0, '', '', true);
-        $pdf->Ln(7);
-        $pdf->MultiCell(164, 7, $responsavel, 1, 'L', 0, 0, '', '', true);
-        $pdf->Ln(7);
-        $pdf->MultiCell(54, 7, $convenio, 1, 'L', 0, 0, '', '', true);
-        $pdf->MultiCell(56, 7, $matricula, 1, 'L', 0, 0, '', '', true);
-        $pdf->MultiCell(54, 7, $validade, 1, 'L', 0, 0, '', '', true);
-        $pdf->Ln(7);
-        $pdf->MultiCell(164, 7, $observacao, 1, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(164, 7, $responsavel, 1, 'L', 0, 0, '', '', true);     
+             
 
         $pdf->Ln(15);
 
         $pdf->SetFont('helvetica', '', 14);
         
-        $pdf->Write(0, 'Contato', '', 0, 'C', true, 0, false, false, 0);
+        $pdf->Write(0, 'Endereço', '', 0, 'C', true, 0, false, false, 0);
         $pdf->Ln(5);
 
         $pdf->SetFont('times', '', 9);
@@ -204,6 +192,45 @@ class RelatorioController extends Controller {
         $pdf->MultiCell(82, 7, $zap, 1, 'L', 0, 0, '', '', true);
         $pdf->Ln(7);
         $pdf->MultiCell(164, 7, $email, 1, 'L', 0, 0, '', '', true);
+        
+        
+        $pdf->Ln(15);
+
+        $pdf->SetFont('helvetica', '', 14);
+                
+        $pdf->Write(0, 'Informações', '', 0, 'C', true, 0, false, false, 0);
+        $pdf->Ln(5);
+        
+        $pdf->SetFont('times', '', 9);
+        
+        $profissao = 'Profissão: ' . $aluno->ds_profissao;
+        $observacao = 'Observação: ' . $aluno->ds_observacao;
+        
+        $pdf->MultiCell(164, 7, $profissao, 1, 'L', 0, 0, '', '', true);
+        $pdf->Ln(7);
+        $pdf->MultiCell(164, 7, $observacao, 1, 'L', 0, 0, '', '', true);
+        
+        $pdf->Ln(15);
+
+        $pdf->SetFont('helvetica', '', 14);
+        
+        $pdf->Write(0, 'Tipo de Consulta', '', 0, 'C', true, 0, false, false, 0);
+        $pdf->Ln(5);
+
+        $pdf->SetFont('times', '', 9);
+        
+        $convenio = 'Convênio: ' . $aluno->id_convenio;
+        $matricula = 'Matrícula:' . $aluno->nr_matricula_conv;
+        $validade = 'Validade:' . $aluno->dt_validade;
+        $profissional = 'Profissionais:' . $aluno->id_profissional;
+        
+        $pdf->MultiCell(70, 7, $convenio, 1, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(44, 7, $matricula, 1, 'L', 0, 0, '', '', true);
+        $pdf->MultiCell(50, 7, $validade, 1, 'L', 0, 0, '', '', true);
+        $pdf->Ln(7);
+        $pdf->MultiCell(164, 7, $profissional, 1, 'L', 0, 0, '', '', true);
+       
+     
 
         //   $pdf->MultiRow('Row ' . ($i + 1), $idade . "\n");
 // reset pointer to the last page
